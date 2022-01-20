@@ -1,20 +1,93 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>
-        {% block title %}Welcome!{% endblock %}
-    </title>
-    <link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.css">
-    {% block stylesheets %}{% endblock %}
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.css"> {% block stylesheets %}{% endblock %}
+		</head>
 
-<body>
-    {% block body %}{% endblock %}
+		<body>
+			{% block body %}
 
-    {% block javascripts %}{% endblock %}
-</body>
+			{% endblock %}
 
-</html> 
+
+			{% block javascripts %}
+				<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+				<script>
+					function onClickBtnLike(event) {
+event.preventDefault();
+
+const url = this.href;
+const spanCount = this.querySelector('span.js-like');
+const icone = this.querySelector('i');
+
+axios.get(url).then(function (response) {
+const likes = response.data;
+console.log(likes);
+spanCount.textContent = likes;
+getNewQuote();
+
+if (icone.classList.contains('fas')) 
+icone.classList.replace('fas', 'far');
+ else 
+icone.classList.replace('far', 'fas');
+
+
+
+}).catch(function (error) {
+if (error.response.status == 403) {
+window.alert('vous netes pas connecte');
+
+}
+});
+
+}
+document.querySelectorAll('a.js-likes').forEach(function (link) {
+link.addEventListener('click', onClickBtnLike);
+})
+				</script>
+
+
+				<script>
+					const text = document.getElementById("quote");
+const author = document.getElementById("author");
+const spotify = document.getElementById("spotify");
+
+const getNewQuote = async () => { // api for quotes
+var url = "http://127.0.0.1:8000/api/posts";
+
+// fetch the data from api
+const response = await fetch(url);
+// convert response to json and store it in quotes array
+const allQuotes = await response.json();
+console.log(allQuotes);
+// Generates a random number between 0 and the length of the quotes array
+const indx = Math.floor(Math.random() * allQuotes.length);
+console.log(indx);
+// Store the quote present at the randomly generated index
+const quote = allQuotes[indx].title;
+
+// Store the author of the respective quote
+const auth = allQuotes[indx].introduction;
+
+
+const spotifysong = allQuotes[indx].spotify;
+
+// function to dynamically display the quote and the author
+text.innerHTML = quote;
+author.innerHTML = auth;
+spotify.innerHTML = '<iframe src="https://open.spotify.com/embed/track/5AsvECdeDjgynnETKvZC2u?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+}
+				</script>
+			{% endblock %}
+
+		</body>
+
+	</html>

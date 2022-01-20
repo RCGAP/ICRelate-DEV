@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\PostLikeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
+/** 
+ *  @apiResource(attributes={
+ *          "formats"={"json"}})
  * @ORM\Entity(repositoryClass=PostLikeRepository::class)
  */
 class PostLike

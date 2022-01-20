@@ -12,6 +12,9 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class PostController extends AbstractController
 {
@@ -24,6 +27,26 @@ class PostController extends AbstractController
             'posts' => $repo->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/favoris", name="favoris")
+     */
+    public function favoris(PostRepository $repo)
+    {
+        return $this->render('post/favoris.html.twig', [
+            'posts' => $repo->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function about()
+    {
+        return $this->render('about.html.twig', [
+        ]);
+    }
+
     /**
      * @Route("/post/{id}/likes",name="like")
      */
@@ -32,7 +55,7 @@ class PostController extends AbstractController
         $user = $this->getUser();
         if (!$user) return $this->json([
             'code' => '403',
-            'message' => 'non authoriser'
+            'message' => 'non autorisé'
         ], 403);
         if ($post->isLikedByUser($user)) {
             $like = $likeRepo->findOneBy([
