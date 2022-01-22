@@ -149,16 +149,48 @@
 {% endblock %}
 
 {% block body %}
+	<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">I Can Relate</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<li class="nav-item">
+					{% if not is_granted('ROLE_USER') %}
+						<a href="/login" class="my-2 btn btn-success">Connexion</a>
+					{% else %}
+						<a href="/logout" class="my-2 btn btn-danger">Déconnexion</a>
+					{% endif %}
+				</li>
+
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="{{path('homepage')}}" aria-current=" page">Home</a>
+
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{path('favoris')}}">Favoris</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{path('about')}}">About</a>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 	<div class="container">
 		{% for post in posts %}
 			{% if app.user and post.isLikedByUser(app.user) %}
 				<div>
 					<h2 class="title">{{post.title}}</h2>
-					<p class="lyrics">{{post.introduction|nl2br}}</p>
+					<p class="lyrics">{{post.introduction|raw}}</p>
 					<div class="links">
 						<iframe src="https://open.spotify.com/embed/track/{{post.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 						<div class="button-box">
-							<button class="button--green--validate">
+							<button class="button--green--validate js-likes">
 								<a href="{{path('like',{'id':post.id})}}">
 									I don't relate anymore
 								</a>
@@ -176,31 +208,16 @@
 
 	<script>
 		function onClickBtnLike(event) {
-
 event.preventDefault();
-
 const url = this.href;
-console.log(url);
 const spanCount = this.querySelector('span.js-like');
 const icone = this.querySelector('i');
 
 axios.get(url).then(function (response) {
 
 const likes = response.data.likes;
-spanCount.textContent = likes;
-if (icone.classList.contains('fas')) 
-icone.classList.replace('fas', 'far');
- else 
-icone.classList.replace('far', 'fas');
 
-
-
-}).catch(function (error) {
-if (error.response.status == 403) {
-window.alert('Oubliez pas de vous connecter :)');
-
-}
-});
+}).catch(function (error) {});
 
 }
 document.querySelectorAll('a.js-likes').forEach(function (link) {

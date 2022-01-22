@@ -1,22 +1,19 @@
 {% extends './base.html.twig' %}
 
-{% block title %}Les articles !
+{% block title %}Welcome to I Can Relate
 {% endblock %}
 
 
 {% block stylesheets %}
 	<style>
 		body {
-			background: white; /* try type yellow */
+			background: white;
 			color: #323232;
-
 			margin: 0;
 			height: 100vh;
-
 			/* display: flex; */
 			align-items: center;
 			justify-content: center;
-
 			font-family: Helvetica neue, roboto;
 		}
 
@@ -53,14 +50,6 @@
 			color: #35495e;
 			letter-spacing: 1px;
 			margin-bottom: 15px;
-		}
-
-		.subtitle {
-			font-weight: 300;
-			font-size: 42px;
-			color: #526488;
-			word-spacing: 5px;
-			padding-bottom: 15px;
 		}
 
 		.links {
@@ -114,21 +103,6 @@
 			background-color: #3b8070;
 		}
 
-		.button--grey {
-			display: inline-block;
-			border-radius: 30px;
-			border: 1px solid #b64040;
-			color: #b64040;
-			text-decoration: none;
-			padding: 10px 30px;
-			margin-left: 15px;
-		}
-
-		.button--grey:hover {
-			color: #fff;
-			background-color: #b64040;
-		}
-
 		.button--red {
 			display: inline-block;
 			border-radius: 30px;
@@ -152,6 +126,7 @@
 
 
 {% block body %}
+	<!--- //TODO: meilleur placement pour le connexion, ajouter la page profil -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-primary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">I Can Relate</a>
@@ -159,43 +134,48 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
+
+
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Home</a>
+					{% if not is_granted('ROLE_USER') %}
+						<a href="/login" class="nav-link">Connexion</a>
+					{% else %}
+						<a href="/logout" class="nav-link">Déconnexion</a>
+					{% endif %}
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{path('homepage')}}" aria-current="page" href="#">Home</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{path('favoris')}}">Favoris</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">About</a>
-					</li>
-					<li class="nav-item">
-						{% if not is_granted('ROLE_USER') %}
-							<a href="/login" class="my-2 btn btn-success">Connexion</a>
-						{% else %}
-							<a href="/logout" class="my-2 btn btn-danger">Déconnexion</a>
-						{% endif %}
-					</li>
+						<a class="nav-link" href="{{path('about')}}">About</a>
 
+					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<div class="container" onload="getnewquote()">
-
+	<div class="container">
 		<div>
 			<h2 class="title" id="author"></h2>
 			<p class="lyrics" id="quote"></p>
 			<div class="links">
 				<div class="spotify" id="spotify"></div>
-				<div class="button-box">
-					<button class="button--red" id="dontRelate"  onclick="getNewQuote()">
-						<a href="" class="btn btn-link js-likes">I don't Relate</a>
-					</button>
-					<button class="button--green" id="like" onclick="getNewQuote()">
-						<a href="" id="link" class="btn btn-link js-likes">I Can Relate</a>
-					</button>
+				{% if not is_granted('ROLE_USER') %}
+					<p id="login">If you want save your choice, you need to login first</p>
+				{% else %}
+					<div class="button-box">
+						<button class="button--red" id="dontRelate" onclick="getNewQuote()">
+							<a href="" class="btn btn-link js-likes">I don't Relate --skip--</a>
+						</button>
+						<button class="button--green" onclick="getNewQuote()">
+							<a href="" id="link" class="btn btn-link js-likes">I Can Relate</a>
+						</button>
+					{% endif %}
 				</div>
 				<button class="button--green" onclick="getNewQuote()">Get a new quote</button>
 			</div>
@@ -207,7 +187,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 	<script>
-
 		function onClickBtnLike(event) {
 event.preventDefault();
 const url = this.href;
@@ -224,8 +203,7 @@ window.alert('Connectez-vous');
 }
 });
 }
-document.querySelectorAll('a.js-likes').forEach(
-	function (link) {
+document.querySelectorAll('a.js-likes').forEach(function (link) {
 link.addEventListener('click', onClickBtnLike);
 })
 	</script>
@@ -236,8 +214,8 @@ link.addEventListener('click', onClickBtnLike);
 const text = document.getElementById("quote");
 const author = document.getElementById("author");
 const spotify = document.getElementById("spotify");
-const like = document.getElementById("like");
 const link = document.getElementById("link");
+const loginFirst = document.getElementById("login");
 
 // api function
 const getNewQuote = async () => {
@@ -258,13 +236,9 @@ let likeSong = allQuotes[index].id
 text.innerHTML = quote;
 author.innerHTML = auth;
 spotify.innerHTML = '<iframe src="https://open.spotify.com/embed/track/' + spotifysong + '?utm_source=generator&theme=0"  width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
-// like.innerHTML = '<a href="/post/' + likeSong + '/likes" class="btn btn-link js-likes">I Can Relate</a>'
+// Display for the href attribute
 document.getElementById("link").removeAttribute("href");
-document.getElementById("link").setAttribute("href","/post/" + likeSong + "/likes");
-
-
-
-console.log(like.innerHTML);
+document.getElementById("link").setAttribute("href", "/post/" + likeSong + "/likes");
 }
 	</script>
 {% endblock  %}

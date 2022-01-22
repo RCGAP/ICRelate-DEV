@@ -66,7 +66,7 @@ class PostController extends AbstractController
             $Manager->flush();
             return $this->json([
                 'code' => 200,
-                'message' => 'Like bien supprime',
+                'message' => 'Like bien supprimé',
                 'likes' => $likeRepo->count([
                     'post' => $post
                 ])
@@ -80,7 +80,7 @@ class PostController extends AbstractController
 
         return $this->json([
             'code' => 200,
-            'message' => 'Like bien ajoute',
+            'message' => 'Like bien ajouté"',
             'likes' => $likeRepo->count([
                 'post' => $post
             ])

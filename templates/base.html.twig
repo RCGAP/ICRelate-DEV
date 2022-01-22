@@ -8,20 +8,170 @@
 			{% endblock %}
 		</title>
 		<link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.css"> {% block stylesheets %}{% endblock %}
-		</head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.css">
 
-		<body>
-			{% block body %}
+		{% block stylesheets %}
+			<style>
+				body {
+					background: white;
+					color: #323232;
 
-			{% endblock %}
+					margin: 0;
+					height: 100vh;
+
+					/* display: flex; */
+					align-items: center;
+					justify-content: center;
+
+					font-family: Helvetica neue, roboto;
+				}
+
+				.container {
+					margin: 0 auto;
+					min-height: 100vh;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					text-align: center;
+				}
+
+				a {
+					text-decoration: none;
+					color: white;
+				}
+
+				.title {
+					font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+					display: block;
+					font-weight: 300;
+					font-size: 30px;
+					color: #35495e;
+					letter-spacing: 1px;
+					margin-top: 0;
+					margin-bottom: 30px;
+				}
+
+				.lyrics {
+					font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+					display: block;
+					font-weight: 300;
+					font-size: 20px;
+					color: #35495e;
+					letter-spacing: 1px;
+					margin-bottom: 15px;
+				}
+
+				.links {
+					padding-top: 30px;
+					padding-bottom: 30px;
+				}
+
+				.spotify {
+					padding-bottom: 30px;
+				}
+
+				html {
+					font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+					font-size: 16px;
+					word-spacing: 1px;
+					-ms-text-size-adjust: 100%;
+					-webkit-text-size-adjust: 100%;
+					-moz-osx-font-smoothing: grayscale;
+					-webkit-font-smoothing: antialiased;
+					box-sizing: border-box;
+				}
+
+				*,
+				*::before,
+				*::after {
+					box-sizing: border-box;
+					margin: 0;
+				}
+
+				.button--green {
+					display: inline-block;
+					border-radius: 30px;
+					border: 3px solid #3b8070;
+					color: #3b8070;
+					text-decoration: none;
+					padding: 10px 30px;
+				}
+
+				.button--green--validate {
+					display: inline-block;
+					border-radius: 30px;
+					border: 3px solid #3b8070;
+					color: #white;
+					background-color: #3b8070;
+					text-decoration: none;
+					padding: 10px 30px;
+				}
+
+				.button--green:hover {
+					color: #fff;
+					background-color: #3b8070;
+				}
+
+				.button--red {
+					display: inline-block;
+					border-radius: 30px;
+					border: 1px solid red;
+					color: red;
+					text-decoration: none;
+					padding: 10px 30px;
+				}
+
+				.button--red:hover {
+					color: #fff;
+					background-color: red;
+				}
+
+				.button-box {
+					padding-top: 30px;
+				}
+			</style>
+
+		{% endblock %}
+	</head>
+	
+		{% block body %}
+			<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">I Can Relate</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<li class="nav-item">
+							{% if not is_granted('ROLE_USER') %}
+								<a href="/login" class="my-2 btn btn-success">Connexion</a>
+							{% else %}
+								<a href="/logout" class="my-2 btn btn-danger">Déconnexion</a>
+							{% endif %}
+						</li>
+
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{path('favoris')}}">Favoris</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">About</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		{% endblock %}
 
 
-			{% block javascripts %}
-				<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		{% block javascripts %}
+			<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-				<script>
-					function onClickBtnLike(event) {
+			<script>
+				function onClickBtnLike(event) {
 event.preventDefault();
 
 const url = this.href;
@@ -52,11 +202,11 @@ window.alert('vous netes pas connecte');
 document.querySelectorAll('a.js-likes').forEach(function (link) {
 link.addEventListener('click', onClickBtnLike);
 })
-				</script>
+			</script>
 
 
-				<script>
-					const text = document.getElementById("quote");
+			<script>
+				const text = document.getElementById("quote");
 const author = document.getElementById("author");
 const spotify = document.getElementById("spotify");
 
@@ -85,9 +235,9 @@ text.innerHTML = quote;
 author.innerHTML = auth;
 spotify.innerHTML = '<iframe src="https://open.spotify.com/embed/track/5AsvECdeDjgynnETKvZC2u?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
 }
-				</script>
-			{% endblock %}
+			</script>
+		{% endblock %}
 
-		</body>
+	</body>
 
-	</html>
+</html>
