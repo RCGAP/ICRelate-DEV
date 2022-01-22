@@ -4,127 +4,6 @@
 {% endblock %}
 
 
-{% block stylesheets %}
-	<style>
-		body {
-			background: white;
-			color: #323232;
-			margin: 0;
-			height: 100vh;
-			/* display: flex; */
-			align-items: center;
-			justify-content: center;
-			font-family: Helvetica neue, roboto;
-		}
-
-		.container {
-			margin: 0 auto;
-			min-height: 100vh;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-		}
-
-		a {
-			text-decoration: none;
-			color: white;
-		}
-
-		.title {
-			font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-			display: block;
-			font-weight: 300;
-			font-size: 30px;
-			color: #35495e;
-			letter-spacing: 1px;
-			margin-top: 0;
-			margin-bottom: 30px;
-		}
-
-		.lyrics {
-			font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-			display: block;
-			font-weight: 300;
-			font-size: 20px;
-			color: #35495e;
-			letter-spacing: 1px;
-			margin-bottom: 15px;
-		}
-
-		.links {
-			padding-top: 30px;
-			padding-bottom: 30px;
-		}
-
-		.spotify {
-			padding-bottom: 30px;
-		}
-
-		html {
-			font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-			font-size: 16px;
-			word-spacing: 1px;
-			-ms-text-size-adjust: 100%;
-			-webkit-text-size-adjust: 100%;
-			-moz-osx-font-smoothing: grayscale;
-			-webkit-font-smoothing: antialiased;
-			box-sizing: border-box;
-		}
-
-		*,
-		*::before,
-		*::after {
-			box-sizing: border-box;
-			margin: 0;
-		}
-
-		.button--green {
-			display: inline-block;
-			border-radius: 30px;
-			border: 3px solid #3b8070;
-			color: #3b8070;
-			text-decoration: none;
-			padding: 10px 30px;
-		}
-
-		.button--green--validate {
-			display: inline-block;
-			border-radius: 30px;
-			border: 3px solid #3b8070;
-			color: #white;
-			background-color: #3b8070;
-			text-decoration: none;
-			padding: 10px 30px;
-		}
-
-		.button--green:hover {
-			color: #fff;
-			background-color: #3b8070;
-		}
-
-		.button--red {
-			display: inline-block;
-			border-radius: 30px;
-			border: 1px solid red;
-			color: red;
-			text-decoration: none;
-			padding: 10px 30px;
-		}
-
-		.button--red:hover {
-			color: #fff;
-			background-color: red;
-		}
-
-		.button-box {
-			padding-top: 30px;
-		}
-	</style>
-
-{% endblock %}
-
-
 {% block body %}
 	<!--- //TODO: meilleur placement pour le connexion, ajouter la page profil -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -138,11 +17,11 @@
 
 				<ul class="navbar-nav">
 					<li class="nav-item">
-					{% if not is_granted('ROLE_USER') %}
-						<a href="/login" class="nav-link">Connexion</a>
-					{% else %}
-						<a href="/logout" class="nav-link">Déconnexion</a>
-					{% endif %}
+						{% if not is_granted('ROLE_USER') %}
+							<a href="/login" class="nav-link">Connexion</a>
+						{% else %}
+							<a href="/logout" class="nav-link">Déconnexion</a>
+						{% endif %}
 					</li>
 					<li class="nav-item">
 						<a class="nav-link active" href="{{path('homepage')}}" aria-current="page" href="#">Home</a>
@@ -203,11 +82,17 @@ window.alert('Connectez-vous');
 }
 });
 }
+
+// Evenements & listeners
 document.querySelectorAll('a.js-likes').forEach(function (link) {
 link.addEventListener('click', onClickBtnLike);
 })
-	</script>
 
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('HTML prêt !');
+  getNewQuote();
+});
+	</script>
 
 	<script>
 		// id of div & links

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}
+				Welcome!
 			{% endblock %}
 		</title>
 		<link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css">
@@ -133,111 +133,108 @@
 
 		{% endblock %}
 	</head>
-	
-		{% block body %}
-			<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="#">I Can Relate</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarNav">
+
+	{% block body %}
+		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">I Can Relate</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<li class="nav-item">
+						{% if not is_granted('ROLE_USER') %}
+							<a href="/login" class="my-2 btn btn-success">Connexion</a>
+						{% else %}
+							<a href="/logout" class="my-2 btn btn-danger">Déconnexion</a>
+						{% endif %}
+					</li>
+
+					<ul class="navbar-nav">
 						<li class="nav-item">
-							{% if not is_granted('ROLE_USER') %}
-								<a href="/login" class="my-2 btn btn-success">Connexion</a>
-							{% else %}
-								<a href="/logout" class="my-2 btn btn-danger">Déconnexion</a>
-							{% endif %}
+							<a class="nav-link active" aria-current="page" href="#">Home</a>
 						</li>
-
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{{path('favoris')}}">Favoris</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">About</a>
-							</li>
-						</ul>
-					</div>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('favoris')}}">Favoris</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">About</a>
+						</li>
+					</ul>
 				</div>
-			</nav>
-		{% endblock %}
+			</div>
+		</nav>
+	{% endblock %}
 
 
-		{% block javascripts %}
-			<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% block javascripts %}
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-			<script>
-				function onClickBtnLike(event) {
-event.preventDefault();
+<script>
+	function onClickBtnLike(event) {
+	event.preventDefault();
 
-const url = this.href;
-const spanCount = this.querySelector('span.js-like');
-const icone = this.querySelector('i');
+	const url = this.href;
+	const spanCount = this.querySelector('span.js-like');
+	const icone = this.querySelector('i');
 
-axios.get(url).then(function (response) {
-const likes = response.data;
-console.log(likes);
-spanCount.textContent = likes;
-getNewQuote();
+	axios.get(url).then(function (response) {
+	const likes = response.data;
+	console.log(likes);
+	spanCount.textContent = likes;
+	getNewQuote();
 
-if (icone.classList.contains('fas')) 
-icone.classList.replace('fas', 'far');
- else 
-icone.classList.replace('far', 'fas');
-
-
-
-}).catch(function (error) {
-if (error.response.status == 403) {
-window.alert('vous netes pas connecte');
-
-}
-});
-
-}
-document.querySelectorAll('a.js-likes').forEach(function (link) {
-link.addEventListener('click', onClickBtnLike);
-})
-			</script>
+	if (icone.classList.contains('fas')) 
+	icone.classList.replace('fas', 'far');
+	else 
+	icone.classList.replace('far', 'fas');
 
 
-			<script>
-				const text = document.getElementById("quote");
-const author = document.getElementById("author");
-const spotify = document.getElementById("spotify");
 
-const getNewQuote = async () => { // api for quotes
-var url = "http://127.0.0.1:8000/api/posts";
+	}).catch(function (error) {
+	if (error.response.status == 403) {
+	window.alert('vous netes pas connecte');
 
-// fetch the data from api
-const response = await fetch(url);
-// convert response to json and store it in quotes array
-const allQuotes = await response.json();
-console.log(allQuotes);
-// Generates a random number between 0 and the length of the quotes array
-const indx = Math.floor(Math.random() * allQuotes.length);
-console.log(indx);
-// Store the quote present at the randomly generated index
-const quote = allQuotes[indx].title;
+	}
+	});
 
-// Store the author of the respective quote
-const auth = allQuotes[indx].introduction;
+	}
+	document.querySelectorAll('a.js-likes').forEach(function (link) {
+	link.addEventListener('click', onClickBtnLike);
+	})
+</script>
 
 
-const spotifysong = allQuotes[indx].spotify;
+<script>
+	const text = document.getElementById("quote");
+	const author = document.getElementById("author");
+	const spotify = document.getElementById("spotify");
 
-// function to dynamically display the quote and the author
-text.innerHTML = quote;
-author.innerHTML = auth;
-spotify.innerHTML = '<iframe src="https://open.spotify.com/embed/track/5AsvECdeDjgynnETKvZC2u?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
-}
-			</script>
-		{% endblock %}
+	const getNewQuote = async () => { // api for quotes
+	var url = "http://127.0.0.1:8000/api/posts";
 
-	</body>
+	// fetch the data from api
+	const response = await fetch(url);
+	// convert response to json and store it in quotes array
+	const allQuotes = await response.json();
+	console.log(allQuotes);
+	// Generates a random number between 0 and the length of the quotes array
+	const indx = Math.floor(Math.random() * allQuotes.length);
+	console.log(indx);
+	// Store the quote present at the randomly generated index
+	const quote = allQuotes[indx].title;
 
+	// Store the author of the respective quote
+	const auth = allQuotes[indx].introduction;
+
+
+	const spotifysong = allQuotes[indx].spotify;
+
+	// function to dynamically display the quote and the author
+	text.innerHTML = quote;
+	author.innerHTML = auth;
+	spotify.innerHTML = '<iframe src="https://open.spotify.com/embed/track/5AsvECdeDjgynnETKvZC2u?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+	}
+</script>
+	{% endblock %}
 </html>

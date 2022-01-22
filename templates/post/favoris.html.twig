@@ -1,151 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les articles !
-{% endblock %}
-{% block stylesheets %}
-	<style>
-		body {
-			background: white; /* try type yellow */
-			color: #323232;
-
-			margin: 0;
-			height: 100vh;
-
-			/* display: flex; */
-			align-items: center;
-			justify-content: center;
-
-			font-family: Helvetica neue, roboto;
-		}
-
-		.container {
-			margin: 0 auto;
-			min-height: 100vh;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-		}
-
-		a {
-			text-decoration: none;
-			color: white;
-		}
-
-		.title {
-			font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-			display: block;
-			font-weight: 300;
-			font-size: 40px;
-			color: #35495e;
-			letter-spacing: 1px;
-			margin-top: 0;
-			margin-bottom: 30px;
-		}
-
-		.lyrics {
-			font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-			display: block;
-			font-weight: 300;
-			font-size: 18px;
-			color: #35495e;
-			letter-spacing: 1px;
-			margin-bottom: 15px;
-		}
-
-		.subtitle {
-			font-weight: 300;
-			font-size: 42px;
-			color: #526488;
-			word-spacing: 5px;
-			padding-bottom: 15px;
-		}
-
-		.links {
-			padding-top: 30px;
-			padding-bottom: 30px;
-		}
-
-		.spotify {
-			padding-bottom: 30px;
-		}
-
-		html {
-			font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-			font-size: 16px;
-			word-spacing: 1px;
-			-ms-text-size-adjust: 100%;
-			-webkit-text-size-adjust: 100%;
-			-moz-osx-font-smoothing: grayscale;
-			-webkit-font-smoothing: antialiased;
-			box-sizing: border-box;
-		}
-
-		*,
-		*::before,
-		*::after {
-			box-sizing: border-box;
-			margin: 0;
-		}
-
-		.button--green {
-			display: inline-block;
-			border-radius: 30px;
-			border: 2px solid #3b8070;
-			color: #3b8070;
-			text-decoration: none;
-			padding: 10px 30px;
-		}
-
-		.button--green--validate {
-			display: inline-block;
-			border-radius: 30px;
-			border: 2px solid #3b8070;
-			color: #white;
-			background-color: #3b8070;
-			text-decoration: none;
-			padding: 10px 30px;
-		}
-
-		.button--green:hover {
-			color: #fff;
-			background-color: #3b8070;
-		}
-
-		.button--grey {
-			display: inline-block;
-			border-radius: 30px;
-			border: 1px solid #b64040;
-			color: #b64040;
-			text-decoration: none;
-			padding: 10px 30px;
-			margin-left: 15px;
-		}
-
-		.button--grey:hover {
-			color: #fff;
-			background-color: #b64040;
-		}
-
-		.button--red {
-			display: inline-block;
-			border-radius: 30px;
-			border: 1px solid red;
-			color: red;
-			text-decoration: none;
-			padding: 10px 30px;
-		}
-
-		.button--red:hover {
-			color: #fff;
-			background-color: red;
-		}
-
-		.button-box {
-			padding-top: 30px;
-		}
-	</style>
-
+{% block title %}
+Your choices
 {% endblock %}
 
 {% block body %}
@@ -174,7 +30,6 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{path('about')}}">About</a>
-
 					</li>
 				</ul>
 			</div>
@@ -202,27 +57,3 @@
 		</div>
 	</div>
 {% endblock %}
-
-{% block javascripts %}
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-	<script>
-		function onClickBtnLike(event) {
-event.preventDefault();
-const url = this.href;
-const spanCount = this.querySelector('span.js-like');
-const icone = this.querySelector('i');
-
-axios.get(url).then(function (response) {
-
-const likes = response.data.likes;
-
-}).catch(function (error) {});
-
-}
-document.querySelectorAll('a.js-likes').forEach(function (link) {
-link.addEventListener('click', onClickBtnLike);
-})
-	</script>
-
-{% endblock  %}
