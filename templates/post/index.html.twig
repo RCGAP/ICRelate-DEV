@@ -5,39 +5,6 @@
 
 
 {% block body %}
-	<!--- //TODO: meilleur placement pour le connexion, ajouter la page profil -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">I Can Relate</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-
-
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						{% if not is_granted('ROLE_USER') %}
-							<a href="/login" class="nav-link">Connexion</a>
-						{% else %}
-							<a href="/logout" class="nav-link">Déconnexion</a>
-						{% endif %}
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="{{path('homepage')}}" aria-current="page" href="#">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{path('favoris')}}">Favoris</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{path('about')}}">About</a>
-
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
 	<div class="container">
 		<div>
 			<h2 class="title" id="author"></h2>
@@ -45,7 +12,7 @@
 			<div class="links">
 				<div class="spotify" id="spotify"></div>
 				{% if not is_granted('ROLE_USER') %}
-					<p id="login">If you want save your choice, you need to login first</p>
+					<a href="{{path('app_login')}}" class="nav-link">If you want save your choice, you need to sign in</a>
 				{% else %}
 					<div class="button-box">
 						<button class="button--red" id="dontRelate" onclick="getNewQuote()">
@@ -86,7 +53,6 @@ document.querySelectorAll('a.js-likes').forEach(function (link) {
 link.addEventListener('click', onClickBtnLike);
 })
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('HTML prêt !');
   getNewQuote();
 });
 	</script>
