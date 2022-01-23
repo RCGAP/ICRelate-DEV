@@ -6,7 +6,7 @@
 <li>Role Admin pour le panneau d'admin: à faire
 <li>Design plus adapté au mobile: à faire
 <li>Sidemenu: à faire
-<li>Fonction getnewquote qui se lance au début: à faire
+<li>Fonction getnewquote qui se lance au début: Terminé
 <li>Transition fade les quote: à faire.
 <li>React: Prévu pour la 2.0
 <li>Rename les variable, les styles, etc au risque de tout casser: à faire un jour.

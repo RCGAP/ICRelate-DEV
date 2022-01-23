@@ -82,12 +82,9 @@ window.alert('Connectez-vous');
 }
 });
 }
-
-// Evenements & listeners
 document.querySelectorAll('a.js-likes').forEach(function (link) {
 link.addEventListener('click', onClickBtnLike);
 })
-
 document.addEventListener('DOMContentLoaded', function() {
   console.log('HTML prêt !');
   getNewQuote();
