@@ -9,8 +9,8 @@ Your choices
 		{% for post in posts %}
 			{% if app.user and post.isLikedByUser(app.user) %}
 				<div>
-					<h2 class="title">{{post.title}}</h2>
-					<p class="lyrics">{{post.introduction|raw}}</p>
+					<h2 class="lyrics">{{post.introduction|raw}}</h2>
+					<p class="title">{{post.title}}</p>
 					<div class="links">
 						<iframe src="https://open.spotify.com/embed/track/{{post.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 						<div class="button-box">

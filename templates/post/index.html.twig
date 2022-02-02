@@ -30,19 +30,22 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-	<script>
+
+<script>
+// like function
 document.querySelectorAll('a.js-likes').forEach(function (link) {
 link.addEventListener('click', onClickBtnLike);
 })
+// function for display data when html is ready
 document.addEventListener('DOMContentLoaded', function() {
   getNewQuote();
 });
-	</script>
+</script>
 
-	<script>
-		// id of div & links
+<script>
+// id div & links
 const text = document.getElementById("quote");
 const author = document.getElementById("author");
 const spotify = document.getElementById("spotify");
