@@ -54,7 +54,7 @@ const loginFirst = document.getElementById("login");
 
 // api function
 const getNewQuote = async () => {
-let urlapi = "http://127.0.0.1:8000/api/posts";
+let urlapi = "https://icr-proto.herokuapp.com/index.php/api/posts";
 console.log(urlapi);
 const response = await fetch(urlapi);
 const allQuotes = await response.json();
