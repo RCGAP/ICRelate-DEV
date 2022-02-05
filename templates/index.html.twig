@@ -22,7 +22,7 @@
 						</button>
 					{% endif %}
 				<button class="button--green">
-				<a href="{{path('like',{'id':quote.id})}}" id="link" class="btn btn-link js-likes">I Can Relate</a>
+				<a href="{{path('like',{'id':quote.id})}}" id="link" class="btn btn-link js-likes" onclick="location.reload()">I Can Relate</a>
 				</button>
 				{% endif %}
 				</div>
