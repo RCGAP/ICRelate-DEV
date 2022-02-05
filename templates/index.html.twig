@@ -8,7 +8,7 @@
 
 	<header class="container">
 		<div>
-			<h2 class="title" id="author">{{quote.introduction}}</h2>
+			<h2 class="title" id="author">{{quote.introduction|raw}}</h2>
 			<p class="lyrics" id="quote">{{quote.title}}</p>
 			<div class="links">
 				<iframe src="https://open.spotify.com/embed/track/{{quote.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
@@ -22,7 +22,7 @@
 						</button>
 					{% endif %}
 				<button class="button--green">
-				<a href="{{path('like',{'id':post.id})}}" id="link" class="btn btn-link js-likes">I Can Relate</a>
+				<a href="{{path('like',{'id':quote.id})}}" id="link" class="btn btn-link js-likes">I Can Relate</a>
 				</button>
 				{% endif %}
 				</div>
