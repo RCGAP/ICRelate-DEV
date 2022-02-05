@@ -9,20 +9,20 @@
 	<header class="container">
 		<div>
 			<h2 class="title" id="author">{{quote.introduction}}</h2>
-			<p class="lyrics" id="quote">{{post.title}}</p>
+			<p class="lyrics" id="quote">{{quote.title}}</p>
 			<div class="links">
-				<iframe src="https://open.spotify.com/embed/track/{{post.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+				<iframe src="https://open.spotify.com/embed/track/{{quote.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 				{% if app.user and quote.isLikedByUser(app.user) %}
 				{% if not is_granted('ROLE_USER') %}
 					<a href="{{path('app_login')}}" class="nav-link">If you want save your choice, you need to sign in</a>
 				{% else %}
 					<div class="button-box">
-						<button class="button--red" id="dontRelate" onclick="getNewQuote()">
+						<button class="button--red" id="dontRelate" onclick="location.reload()">
 							<a href="" class="btn btn-link js-likes">I don't Relate</a>
 						</button>
 					{% endif %}
-				<button class="button--green" onclick="getNewQuote()">
-				<a href="" id="link" class="btn btn-link js-likes">I Can Relate</a>
+				<button class="button--green">
+				<a href="{{path('like',{'id':post.id})}}" id="link" class="btn btn-link js-likes">I Can Relate</a>
 				</button>
 				{% endif %}
 				</div>
