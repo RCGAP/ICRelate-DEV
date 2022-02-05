@@ -8,10 +8,10 @@
 
 	<header class="container">
 		<div>
-			<h2 class="title" id="author"></h2>
-			<p class="lyrics" id="quote"></p>
+			<h2 class="title" id="author">{{quote.introduction}}</h2>
+			<p class="lyrics" id="quote">{{post.title}}</p>
 			<div class="links">
-				<div class="spotify" id="spotify"></div>
+				<iframe src="https://open.spotify.com/embed/track/{{post.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 				{% if app.user and quote.isLikedByUser(app.user) %}
 				{% if not is_granted('ROLE_USER') %}
 					<a href="{{path('app_login')}}" class="nav-link">If you want save your choice, you need to sign in</a>
@@ -20,7 +20,6 @@
 						<button class="button--red" id="dontRelate" onclick="getNewQuote()">
 							<a href="" class="btn btn-link js-likes">I don't Relate</a>
 						</button>
-
 					{% endif %}
 				<button class="button--green" onclick="getNewQuote()">
 				<a href="" id="link" class="btn btn-link js-likes">I Can Relate</a>
@@ -50,11 +49,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 // id div & links
-const text = document.getElementById("quote");
-const author = document.getElementById("author");
-const spotify = document.getElementById("spotify");
-const link = document.getElementById("link");
-const loginFirst = document.getElementById("login");
+//const text = document.getElementById("quote");
+//const author = document.getElementById("author");
+//const spotify = document.getElementById("spotify");
+//const link = document.getElementById("link");
+// const loginFirst = document.getElementById("login");
 
 // api function
 const getNewQuote = async () => {
