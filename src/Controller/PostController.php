@@ -23,8 +23,17 @@ class PostController extends AbstractController
      */
     public function index(PostRepository $repo)
     {
+
+        $quotes = $this->getDoctrine()
+            ->getRepository(post::class)
+            ->findAll();
+
+            $key = array_rand($quotes);
+            $random = $quotes[$key];
+
+
         return $this->render('index.html.twig', [
-            'posts' => $repo->findAll(),
+            'quote' => $random,
         ]);
     }
 

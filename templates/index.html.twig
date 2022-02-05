@@ -5,28 +5,32 @@
 
 
 {% block body %}
+
 	<header class="container">
 		<div>
 			<h2 class="title" id="author"></h2>
 			<p class="lyrics" id="quote"></p>
 			<div class="links">
 				<div class="spotify" id="spotify"></div>
+				{% if app.user and quote.isLikedByUser(app.user) %}
 				{% if not is_granted('ROLE_USER') %}
 					<a href="{{path('app_login')}}" class="nav-link">If you want save your choice, you need to sign in</a>
 				{% else %}
 					<div class="button-box">
 						<button class="button--red" id="dontRelate" onclick="getNewQuote()">
-							<a href="" class="btn btn-link js-likes">I don't Relate --skip--</a>
+							<a href="" class="btn btn-link js-likes">I don't Relate</a>
 						</button>
-						<button class="button--green" onclick="getNewQuote()">
-							<a href="" id="link" class="btn btn-link js-likes">I Can Relate</a>
-						</button>
+
 					{% endif %}
+				<button class="button--green" onclick="getNewQuote()">
+				<a href="" id="link" class="btn btn-link js-likes">I Can Relate</a>
+				</button>
+				{% endif %}
 				</div>
-				<button class="button--green" onclick="getNewQuote()">Get a new quote</button>
+				<button class="button--green" onclick="location.reload()">Get a new quote</button>
 			</div>
 		</div>
-	</header>
+	</header> 
 {% endblock %}
 
 {% block javascripts %}
