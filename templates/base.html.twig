@@ -163,9 +163,13 @@
 					</li>
 					<li class="nav-item">
 						{% if not is_granted('ROLE_USER') %}
-							<a href="/login" class="nav-link">Connexion</a>
+						<a href="/login" class="nav-link">Connexion</a>
+					</li>
+					<li class="nav-item">
+						<a href="/register" class="nav-link">Sign up</a>
 						{% else %}
-							<a href="/logout" class="nav-link">Déconnexion</a>
+					</li>
+						<a href="/logout" class="nav-link">Déconnexion</a>
 						{% endif %}
 					</li>
 					{% if is_granted('ROLE_ADMIN') %}
@@ -194,7 +198,7 @@
 	const likes = response.data;
 	console.log(likes);
 	spanCount.textContent = likes;
-	getNewQuote();
+
 
 	if (icone.classList.contains('fas')) 
 	icone.classList.replace('fas', 'far');

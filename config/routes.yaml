@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+connect_spotify_check:
+  path: /oauth/check/spotify
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController

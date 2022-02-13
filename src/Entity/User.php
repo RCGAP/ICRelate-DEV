@@ -6,10 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -40,6 +42,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="user", orphanRemoval=true)
      */
     private $postLikes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $spotifyID;
 
     public function __construct()
     {
@@ -153,6 +160,18 @@ class User implements UserInterface
                 $postLike->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSpotifyID(): ?string
+    {
+        return $this->spotifyID;
+    }
+
+    public function setSpotifyID(?string $spotifyID): self
+    {
+        $this->spotifyID = $spotifyID;
 
         return $this;
     }

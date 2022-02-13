@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
@@ -25,6 +27,17 @@ class UserController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
+    /**
+     * @Route("/connect/spotify", name="spotify_connect")
+     */
+    public function connect(ClientRegistry $clientRegistry): RedirectResponse 
+    {
+        $client = $clientRegistry->getClient('spotify');
+        return $client->redirect(['streaming','user-read-playback-position','app-remote-control']);
+    }
+
+
 
     /**
      * @Route("/logout", name="app_logout")
