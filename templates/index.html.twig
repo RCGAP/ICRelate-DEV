@@ -11,6 +11,7 @@
 			<p class="lyrics" id="quote">{{quote.title}}</p>
 				<div class="links">
 					<iframe src="https://open.spotify.com/embed/track/{{quote.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+					</div>
 					{% if app.user and quote.isLikedByUser(app.user) or not is_granted('ROLE_USER') %}
 					<button class="button--green" onclick="location.reload()">Get a new quote</button>
 					{% else %}
