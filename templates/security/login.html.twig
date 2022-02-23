@@ -14,12 +14,15 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal text-white">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-
+    <h1 class="mb-3 font-weight-normal text-white">Please sign in</h1>
+    <div class="form-floating mb-3">
+    <input type="email" value="{{ last_username }}" name="email" id="floatingInput" class="form-control" placeholder="name@example.com" required autofocus>
+    <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+    <input type="password" name="password" id="floatingPassword" class="form-control" required>
+    <label for="floatingPassword">Password</label>
+    </div>
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
