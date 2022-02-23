@@ -9,19 +9,19 @@ Your choices
 		{% for post in posts %}
 			{% if app.user and post.isLikedByUser(app.user) %}
 				<div>
-					<h2 class="favoris">{{post.introduction|raw}}</h2>
+				<h2 class="favoris">{{post.introduction|raw}}</h2>
 					<p class="title">{{post.title}}</p>
-					<div class="links">
-						<iframe src="https://open.spotify.com/embed/track/{{post.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-						<div class="button-box">
-							<button class="button--green--validate">
-								<a class ="js-likes" href="{{path('like',{'id':post.id})}}">
-									I don't relate anymore
-								</a>
-							</button>
-						</div>
-					</div>
-				{% endif %}
-			{% endfor %} 
+				<div class="links">
+					<iframe src="https://open.spotify.com/embed/track/{{post.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+				</div>
+				<div class="button-box">
+					<button class="button--green--validate">
+						<a class ="js-likes" href="{{path('like',{'id':post.id})}}">
+							I don't relate anymore
+						</a>
+					</button>
+				</div>
+			{% endif %}
+		{% endfor %} 
 	</div>
 {% endblock %}

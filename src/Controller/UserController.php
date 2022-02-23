@@ -34,7 +34,7 @@ class UserController extends AbstractController
     public function connect(ClientRegistry $clientRegistry): RedirectResponse 
     {
         $client = $clientRegistry->getClient('spotify');
-        return $client->redirect(['streaming','user-read-playback-position','app-remote-control', 'user-modify-playback-state']);
+        return $client->redirect(['user-read-playback-position','user-read-private','app-remote-control', 'user-modify-playback-state']);
     }
 
 
