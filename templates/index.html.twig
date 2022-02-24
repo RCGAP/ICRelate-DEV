@@ -1,37 +1,29 @@
 {% extends './base.html.twig' %}
 
-{% block title %}Welcome to I Can Relate
+{% block title %}
 {% endblock %}
 
 
 {% block body %}
 <header class="container">
 	<div>
-		<h2 class="title" id="author">{{quote.introduction|raw}}</h2>
-			<p class="lyrics" id="quote">{{quote.title}}</p>
-				<div class="links">
-					<iframe src="https://open.spotify.com/embed/track/{{quote.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-					</div>
-					{% if app.user and quote.isLikedByUser(app.user) or not is_granted('ROLE_USER') %}
-					<button class="button--green" onclick="location.reload()">Get a new quote</button>
-					{% else %}
-						<div class="button-box">
-							<button class="button--red" id="dontRelate" onclick="location.reload()">
-								<a href="" class="btn btn-link js-likes">I don't Relate</a>
-							</button>
-							<button class="button--green">
-								<a href="{{path('like',{'id':quote.id})}}" id="link" class="btn btn-link js-likes" onclick="location.reload()">I Can Relate</a>
-							</button>
-						</div>
-					{% endif %}
-		</header> 
-  {% endblock %}
-
-{% block javascripts %}
-<script>
-// like function
-document.querySelectorAll('a.js-likes').forEach(function (link) {
-link.addEventListener('click', onClickBtnLike);
-})
-</script>
-{% endblock  %}
+		<h2 class="title">{{quote.introduction|raw}}</h2>
+		<p class="lyrics">{{quote.title}}</p>
+		<div class="links">
+			<iframe src="https://open.spotify.com/embed/track/{{quote.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+		</div>
+		{% if app.user and quote.isLikedByUser(app.user) or not is_granted('ROLE_USER') %}
+			<button class="button--green" onclick="location.reload()">Get a new quote</button>
+		{% else %}
+		<div class="button-box">
+			<button class="button--red" onclick="location.reload()">
+				<a href="" class="btn btn-link js-likes">I don't Relate</a>
+			</button>
+			<button class="button--green">
+				<a href="{{path('like',{'id':quote.id})}}" id="link" class="btn btn-link js-likes" onclick="location.reload()">I Can Relate</a>
+			</button>
+		</div>
+		{% endif %} 
+	</div>			
+</header> 
+{% endblock %}

@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Your choices
+I Can Relate - Choice
 {% endblock %}
 
 {% block body %}
 	<div class="container">
+		<div>
+	<h1 class="favoris">There are the songs you feel connected, you can choose as you wish</h1>
 		{% for post in posts %}
 			{% if app.user and post.isLikedByUser(app.user) %}
-				<div>
 				<h2 class="favoris">{{post.introduction|raw}}</h2>
 					<p class="title">{{post.title}}</p>
 				<div class="links">
@@ -17,11 +18,12 @@ Your choices
 				<div class="button-box">
 					<button class="button--green--validate">
 						<a class ="js-likes" href="{{path('like',{'id':post.id})}}">
-							I don't relate anymore
+						I don't relate anymore
 						</a>
 					</button>
 				</div>
 			{% endif %}
 		{% endfor %} 
+		</div>
 	</div>
 {% endblock %}
