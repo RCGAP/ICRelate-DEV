@@ -4,17 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\PostLike;
-use App\Repository\PostLikeRepository;
+use App\Entity\PostDislike;
 use App\Repository\PostRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\PostLikeRepository;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\PostDislikeRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PostController extends AbstractController
 {
@@ -91,6 +93,47 @@ class PostController extends AbstractController
             'code' => 200,
             'message' => 'Like bien ajouté"',
             'likes' => $likeRepo->count([
+                'post' => $post
+            ])
+
+        ], 200);
+    }
+
+    /**
+     * @Route("/post/{id}/dislikes",name="dislike")
+     */
+    public function dislike(Post $post, EntityManagerInterface $Manager, PostDislikeRepository $dislikeRepo): Response
+    {
+        $user = $this->getUser();
+        if (!$user) return $this->json([
+            'code' => '403',
+            'message' => 'non autorisé'
+        ], 403);
+        if ($post->isDislikedByUser($user)) {
+            $dislike = $dislikeRepo->findOneBy([
+                'post' => $post,
+                'user' => $user
+            ]);
+            $Manager->remove($dislike);
+            $Manager->flush();
+            return $this->json([
+                'code' => 200,
+                'message' => 'Like bien supprimé',
+                'likes' => $dislikeRepo->count([
+                    'post' => $post
+                ])
+            ], 200);
+        }
+        $dislike = new PostDislike();
+        $dislike->setPost($post)
+            ->setUser($user);
+        $Manager->persist($dislike);
+        $Manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'Like bien ajouté"',
+            'likes' => $dislikeRepo->count([
                 'post' => $post
             ])
 

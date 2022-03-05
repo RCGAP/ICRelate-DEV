@@ -41,9 +41,20 @@ class Post
      */
     private $postLikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PostDislike::class, mappedBy="post")
+     */
+    private $dislikes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $youtube;
+
     public function __construct()
     {
         $this->postLikes = new ArrayCollection();
+        $this->dislikes = new ArrayCollection();
     }
     public function __toString()
     {
@@ -127,4 +138,54 @@ class Post
         }
         return false;
     }
+
+    /**
+     * @return Collection|PostDislike[]
+     */
+    public function getDislikes(): Collection
+    {
+        return $this->dislikes;
+    }
+
+    public function addDislike(PostDislike $dislike): self
+    {
+        if (!$this->dislikes->contains($dislike)) {
+            $this->dislikes[] = $dislike;
+            $dislike->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDislike(PostDislike $dislike): self
+    {
+        if ($this->dislikes->removeElement($dislike)) {
+            // set the owning side to null (unless already changed)
+            if ($dislike->getPost() === $this) {
+                $dislike->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+        public function isDislikedByUser(User $user): bool
+    {
+        foreach ($this->postDislikes as $postDislike) {
+            if ($postDislike->getUser() === $user) return true;
+        }
+        return false;
+    }
+
+        public function getYoutube(): ?string
+        {
+            return $this->youtube;
+        }
+
+        public function setYoutube(?string $youtube): self
+        {
+            $this->youtube = $youtube;
+
+            return $this;
+        }
 }

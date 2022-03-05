@@ -21,6 +21,7 @@ class PostCrudController extends AbstractCrudController
             TextField::new('title'),
             TextEditorField::new('introduction'),
             TextField::new('content'),
+            TextField::new('youtube'),
         ];
     }
     

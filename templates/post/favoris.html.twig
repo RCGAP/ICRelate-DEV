@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-I Can Relate - Choice
+  I Can Relate - Choices
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<div>
-	<h1 class="favoris">There are the songs you feel connected, you can choose as you wish</h1>
-		{% for post in posts %}
-			{% if app.user and post.isLikedByUser(app.user) %}
-				<h2 class="favoris">{{post.introduction|raw}}</h2>
-					<p class="title">{{post.title}}</p>
-				<div class="links">
-					<iframe src="https://open.spotify.com/embed/track/{{post.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-				</div>
-				<div class="button-box">
-					<button class="button--green--validate">
-						<a class ="js-likes" href="{{path('like',{'id':post.id})}}">
-						I don't relate anymore
-						</a>
-					</button>
-				</div>
-			{% endif %}
-		{% endfor %} 
-		</div>
-	</div>
+  <div class="container">
+    <div>
+      <h1 class="favoris"></h1>
+      {% for post in posts %}
+        {% if app.user and post.isLikedByUser(app.user) %}
+          <h2 class="favoris">{{post.introduction|raw}}</h2>
+          <p class="title">{{post.title}}</p>
+          <div class="player">
+            <iframe src="https://open.spotify.com/embed/track/{{post.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          </div>
+          <div class="button-box">
+            <a class="js-likes" href="{{path('like',{'id':post.id})}}">
+              <button class="button--green--validate js-like" id="btn">
+                I don't relate anymore
+              </button>
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+  </div>
+</div>
 {% endblock %}

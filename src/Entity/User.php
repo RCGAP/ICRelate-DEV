@@ -48,9 +48,15 @@ class User implements UserInterface
      */
     private $spotifyID;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PostDislike::class, mappedBy="user")
+     */
+    private $dislikes;
+
     public function __construct()
     {
         $this->postLikes = new ArrayCollection();
+        $this->dislikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,6 +178,36 @@ class User implements UserInterface
     public function setSpotifyID(?string $spotifyID): self
     {
         $this->spotifyID = $spotifyID;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostDislike[]
+     */
+    public function getDislikes(): Collection
+    {
+        return $this->dislikes;
+    }
+
+    public function addDislike(PostDislike $dislike): self
+    {
+        if (!$this->dislikes->contains($dislike)) {
+            $this->dislikes[] = $dislike;
+            $dislike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDislike(PostDislike $dislike): self
+    {
+        if ($this->dislikes->removeElement($dislike)) {
+            // set the owning side to null (unless already changed)
+            if ($dislike->getUser() === $this) {
+                $dislike->setUser(null);
+            }
+        }
 
         return $this;
     }
