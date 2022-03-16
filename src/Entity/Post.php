@@ -171,8 +171,8 @@ class Post
 
         public function isDislikedByUser(User $user): bool
     {
-        foreach ($this->postDislikes as $postDislike) {
-            if ($postDislike->getUser() === $user) return true;
+        foreach ($this->dislikes as $dislike) {
+            if ($dislike->getUser() === $user) return true;
         }
         return false;
     }

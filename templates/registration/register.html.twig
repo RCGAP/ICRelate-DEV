@@ -10,7 +10,7 @@
     <h1 class="h3 mb-3 font-weight-normal text-white">Register</h1>
     <h3 class="h3 mb-3 font-weight-normal text-white">
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.email,{'attr': {'class': 'form-floating', 'id': 'floatingInput' }}) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}

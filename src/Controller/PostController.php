@@ -59,7 +59,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/post/{id}/likes",name="like")
+     * @Route("/post/{id}/icanrelate",name="like")
      */
     public function like(Post $post, EntityManagerInterface $Manager, PostLikeRepository $likeRepo): Response
     {
@@ -100,7 +100,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/post/{id}/dislikes",name="dislike")
+     * @Route("/post/{id}/idontrelate",name="dislike")
      */
     public function dislike(Post $post, EntityManagerInterface $Manager, PostDislikeRepository $dislikeRepo): Response
     {
@@ -118,7 +118,7 @@ class PostController extends AbstractController
             $Manager->flush();
             return $this->json([
                 'code' => 200,
-                'message' => 'Like bien supprimé',
+                'message' => 'dislike bien supprimé',
                 'likes' => $dislikeRepo->count([
                     'post' => $post
                 ])
@@ -132,7 +132,7 @@ class PostController extends AbstractController
 
         return $this->json([
             'code' => 200,
-            'message' => 'Like bien ajouté"',
+            'message' => 'dislike bien ajouté"',
             'likes' => $dislikeRepo->count([
                 'post' => $post
             ])

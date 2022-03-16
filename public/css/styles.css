@@ -10,7 +10,6 @@ body {
 .container {
 	margin: 0 auto;
 	min-height: 90vh;
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
@@ -21,8 +20,15 @@ a {
 	color: white;
 }
 
+h1 {
+	color: white;
+	margin-bottom: 1rem;
+	font-size: 2rem;
+}
+
 .title {
 	font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-style: italic;
 	display: block;
 	font-weight: 1;
 	font-size: 22px;
@@ -33,15 +39,35 @@ a {
 
 }
 
+hr {
+	background-color: #fff;
+}
+
+.mainTitle {
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
 .lyrics,
 .about {
 	font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	display: block;
 	font-weight: 300;
-	font-size: 25px;
+	font-size: 22px;
 	color: #fff;
 	letter-spacing: 1px;
 	margin-bottom: 20px;
+
+}
+
+.signup {
+	font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	display: block;
+	font-weight: 300;
+	font-size: 15px;
+	color: #fff;
+	letter-spacing: 1px;
+	margin-bottom: 40px;
 
 }
 
@@ -121,10 +147,6 @@ html {
 	background-color: red;
 }
 
-.button-box {
-	padding-top: 60px;
-}
-
 
 /********************  CSS FOR MOBILE ************************************/
 @media all and (max-width: 1024px) {
@@ -136,8 +158,13 @@ html {
 		font-size: 30px;
 	}
 
+	.signup {
+	font-size: 40px;
+	}
+
 	.title {
 		font-size: 45px;
+		letter-spacing: 0px;
 	}
 
 	.lyrics {
