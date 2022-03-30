@@ -37,6 +37,16 @@ class BlogPost
      */
     private $tags;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CreatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $introduction;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class BlogPost
     public function setTags(?string $tags): self
     {
         $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->CreatedAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
+    {
+        $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+    public function getIntroduction(): ?string
+    {
+        return $this->introduction;
+    }
+
+    public function setIntroduction(string $introduction): self
+    {
+        $this->introduction = $introduction;
 
         return $this;
     }
