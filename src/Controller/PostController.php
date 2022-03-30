@@ -44,8 +44,28 @@ class PostController extends AbstractController
      */
     public function favoris(PostRepository $repo)
     {
-        return $this->render('post/favoris.html.twig', [
+        return $this->render('favoris.html.twig', [
             'posts' => $repo->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/blog", name="blog")
+     */
+    public function blog(PostRepository $repo)
+    {
+        return $this->render('blog/blog.html.twig', [
+            'posts' => $repo->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/blog/{id}/blog_show", name="blog_show")
+     */
+    public function blog_show(Post $post): Response
+    {
+        return $this->render('blog/blog_show.html.twig', [
+            'post' => $post,
         ]);
     }
 

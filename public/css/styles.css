@@ -147,15 +147,64 @@ html {
 	background-color: red;
 }
 
+.button-box {
+	padding-bottom: 30px
+ }
+
 
 /********************  CSS FOR MOBILE ************************************/
 @media all and (max-width: 1024px) {
+
+	.player--mobile {
+		padding-top:0px
+		padding-bottom: 0px;
+		background-color: black;
+	}
+
 	.button--red {
 		font-size: 30px;
+		
 	}
 
 	.button--green {
 		font-size: 30px;
+	}
+	.button--red--mobile {
+			font-family: "Quicksand",
+			"Source Sans Pro",
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			"Helvetica Neue",
+			Arial,
+			sans-serif;
+			display: inline-block;
+			background-color: #1D1D1A;
+			border: 1px solid red;
+			color: red;
+			text-decoration: none;
+		font-size: 30px;
+		padding: 40px 67px;
+	}
+
+	.button--green--mobile {
+		font-size: 30px;
+		padding: 40px 67px;
+		background-color: black;
+			font-family: "Quicksand",
+			"Source Sans Pro",
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			"Helvetica Neue",
+			Arial,
+			sans-serif;
+			display: inline-block;
+			border: 1px solid #3b8070;
+			color: white;
+			text-decoration: none;
 	}
 
 	.signup {
