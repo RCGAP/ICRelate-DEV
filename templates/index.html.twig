@@ -18,20 +18,20 @@
       <hr>
     </div>
 
-    <div class="lyrics">
+    <div class="lyrics animate__animated animate__fadeIn">
       {{quote.introduction|raw}}
     </div>
-    <div class="title">
+    <div class="title animate__animated animate__fadeIn">
       <p>
         {{quote.title}}
       </p>
     </div>
-    <div class="player">
+    <div class="player animate__animated animate__fadeIn">
       <iframe src="https://open.spotify.com/embed/track/{{quote.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
     {# Double condition suite à un echec répété avec une seule condition #}
     {% if app.user and quote.isLikedByUser(app.user) or not is_granted('ROLE_USER') %}
-      <div class="button-box">
+      <div class="button-box animate__animated animate__fadeIn">
         <button class="button--green" onclick="location.reload()">Get a new quote</button>
       {% elseif app.user and quote.isDislikedByUser(app.user) or not is_granted('ROLE_USER') %}
         <div class="button-box">
