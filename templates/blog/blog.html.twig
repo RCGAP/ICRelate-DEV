@@ -1,23 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  I Can Relate - Choices
+  I Can Relate - Blog
 {% endblock %}
 
 {% block body %}
   <div class="container">
     <div class="mainTitle">
-      <h1>Blog</h1>
+      <h1>Welcome to the blog<br>
+      Interviews, fun facts and behind the scene</h1>
       <hr>
 {% for post in posts %}
-<div class="row">
-  <div class="span8">
     <div class="row">
       <div class="span8">
         <h4>
-          <strong>
             <a href="#">{{post.title}}</a>
-          </strong>
         </h4>
       </div>
     </div>
@@ -28,7 +25,7 @@
         </a>
       </div>
       <div class="span6 about">
-        <p>
+        <p class="blogpost">
           {{post.introduction}}
         </p>
         <p>
@@ -36,21 +33,6 @@
         </p>
       </div>
     </div>
-    <div class="row about">
-      <div class="span8">
-        <p></p>
-        <p>
-          <i class="icon-user"></i>
-          by
-          <a href="#">John</a>
-          |
-          <i class="icon-calendar"></i>
-          Sept 16th, 2012 |
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 {% endfor %}
 <hr>
 {% endblock %}

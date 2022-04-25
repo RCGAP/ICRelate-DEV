@@ -24,9 +24,9 @@
             <a class="nav-link active" href="{{path('homepage')}}" aria-current="page">Home</a>
           </li>
           <li class="nav-item">
-            {% if not is_granted('ROLE_USER') %}
             <a class="nav-link" href="{{path('favoris')}}">Favoris</a>
           </li>
+            {% if not is_granted('ROLE_USER') %}
           <li class="nav-item">
               <a href="{{path('app_login')}}" class="nav-link">Login</a>
             </li>

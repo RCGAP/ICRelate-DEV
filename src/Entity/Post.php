@@ -169,12 +169,14 @@ class Post
         return $this;
     }
 
-        public function isDislikedByUser(User $user): bool
-    {
-        foreach ($this->dislikes as $dislike) {
-            if ($dislike->getUser() === $user) return true;
+    public function isDislikedByUser(User $user): bool
+    { foreach($this->dislikes as $dislike){
+        if($dislike->getUser() === $user){
+        return true;
         }
-        return false;
+    }
+
+    return false;
     }
 
         public function getYoutube(): ?string

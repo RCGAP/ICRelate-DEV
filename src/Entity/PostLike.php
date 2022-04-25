@@ -40,7 +40,6 @@ class PostLike
     }
     
 
-
     public function getPost(): ?Post
     {
         return $this->post;

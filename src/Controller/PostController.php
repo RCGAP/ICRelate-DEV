@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-use App\Entity\PostLike;
-use App\Entity\PostDislike;
 use App\Repository\PostRepository;
+use App\Entity\PostDislike;
+use App\Repository\PostDislikeRepository;
+use App\Entity\PostLike;
 use App\Repository\PostLikeRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\PostDislikeRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
@@ -110,11 +110,11 @@ class PostController extends AbstractController
             'message' => 'non autorisé'
         ], 403);
         if ($post->isDislikedByUser($user)) {
-            $dislike = $dislikeRepo->findOneBy([
+            $Postdislike = $dislikeRepo->findOneBy([
                 'post' => $post,
                 'user' => $user
             ]);
-            $Manager->remove($dislike);
+            $Manager->remove($Postdislike);
             $Manager->flush();
             return $this->json([
                 'code' => 200,
@@ -124,10 +124,10 @@ class PostController extends AbstractController
                 ])
             ], 200);
         }
-        $dislike = new PostDislike();
-        $dislike->setPost($post)
+        $Postdislike = new PostDislike();
+        $Postdislike->setPost($post)
             ->setUser($user);
-        $Manager->persist($dislike);
+        $Manager->persist($Postdislike);
         $Manager->flush();
 
         return $this->json([

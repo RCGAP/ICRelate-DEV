@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Entity;
-
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\PostDislikeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ *  @apiResource(attributes={
+ *      "formats"={"json"}})
  * @ORM\Entity(repositoryClass=PostDislikeRepository::class)
  */
 class PostDislike
@@ -19,11 +23,13 @@ class PostDislike
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="dislikes")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $post;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="dislikes")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 

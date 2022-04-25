@@ -33,11 +33,7 @@
     {% if app.user and quote.isLikedByUser(app.user) or not is_granted('ROLE_USER') %}
       <div class="button-box animate__animated animate__fadeIn">
         <button class="button--green" onclick="location.reload()">Get a new quote</button>
-      {% elseif app.user and quote.isDislikedByUser(app.user) or not is_granted('ROLE_USER') %}
-        <div class="button-box">
-          <button class="button--green" onclick="location.reload()">Get a new quote</button>
         {% else %}
-
           <a href="{{path('dislike',{'id':quote.id})}}" class="btn btn-link js-likes" onclick="location.reload()">
             <button class="button--red">
               I don't Relate
@@ -50,6 +46,7 @@
             </button>
           </a>
         {% endif %}
-      </main>
-      <!-- <nav class="navbar fixed-bottom navbar-light bg-light"> <div class="player--mobile"> <iframe src="https://open.spotify.com/embed/track/{{quote.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> {% if app.user and quote.isLikedByUser(app.user)or not is_granted('ROLE_USER') %} <div class="button-box--mobile"> <button class="button--green" onclick="location.reload()">Get a new quote</button> {% else %} <button class="button--red--mobile"> <a href="{{path('dislike',{'id':quote.id})}}" class="btn btn-link js-likes" onclick="location.reload()"> <button class="button--red--mobile"> I don't Relate </button> </a> </button> <button class="button--green--mobile"> <a href="{{path('like',{'id':quote.id})}}" class="btn btn-link js-likes" onclick="location.reload()"><button class="button--green--mobile">I Can Relate</a> </button> </div> {% endif %} </nav> <!-->
-    {% endblock %}
+      </div>
+    </main>
+    <!-- <nav class="navbar fixed-bottom navbar-light bg-light"> <div class="player--mobile"> <iframe src="https://open.spotify.com/embed/track/{{quote.content}}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> {% if app.user and quote.isLikedByUser(app.user)or not is_granted('ROLE_USER') %} <div class="button-box--mobile"> <button class="button--green" onclick="location.reload()">Get a new quote</button> {% else %} <button class="button--red--mobile"> <a href="{{path('dislike',{'id':quote.id})}}" class="btn btn-link js-likes" onclick="location.reload()"> <button class="button--red--mobile"> I don't Relate </button> </a> </button> <button class="button--green--mobile"> <a href="{{path('like',{'id':quote.id})}}" class="btn btn-link js-likes" onclick="location.reload()"><button class="button--green--mobile">I Can Relate</a> </button> </div> {% endif %} </nav> <!-->
+  {% endblock %}
