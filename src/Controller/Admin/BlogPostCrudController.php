@@ -6,6 +6,7 @@ use App\Entity\BlogPost;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
 class BlogPostCrudController extends AbstractCrudController
 {
@@ -19,8 +20,10 @@ class BlogPostCrudController extends AbstractCrudController
     {
         return [
             TextField::new('title'),
+            TextField::new('introduction'),
             TextEditorField::new('content'),
             TextField::new('tags'),
+            DateTimeField::new('CreatedAt'),
         ];
     }
 }

@@ -17,6 +17,8 @@ body {
 
 .blogpost {
 	text-align: justify;
+	font-size: 18px;
+	
 }
 
 a {
@@ -160,7 +162,7 @@ html {
 @media all and (max-width: 1024px) {
 
 	.player--mobile {
-		padding-top:0px
+		padding-top:0px;
 		padding-bottom: 0px;
 		background-color: black;
 	}
