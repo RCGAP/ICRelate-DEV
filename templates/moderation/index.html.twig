@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Moderation index{% endblock %}
+
+{% block body %}
+    <h1>Moderation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Introduction</th>
+                <th>Content</th>
+                <th>Youtube</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for moderation in moderations %}
+            <tr>
+                <td>{{ moderation.id }}</td>
+                <td>{{ moderation.title }}</td>
+                <td>{{ moderation.introduction }}</td>
+                <td>{{ moderation.content }}</td>
+                <td>{{ moderation.youtube }}</td>
+                <td>
+                    <a href="{{ path('moderation_show', {'id': moderation.id}) }}">show</a>
+                    <a href="{{ path('moderation_edit', {'id': moderation.id}) }}">edit</a>
+                    <a href="{{ path('moderation_validate', {'id': moderation.id}) }}">validate</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('moderation_new') }}">Create new</a>
+{% endblock %}
