@@ -6,6 +6,7 @@ use App\Entity\Moderation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ModerationType extends AbstractType
 {
@@ -13,7 +14,7 @@ class ModerationType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('introduction')
+            ->add('introduction', TextareaType::class)
             ->add('content')
             ->add('youtube')
         ;

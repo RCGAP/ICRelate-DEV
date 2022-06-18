@@ -63,7 +63,20 @@ hr {
 	color: #fff;
 	letter-spacing: 1px;
 	margin-bottom: 20px;
+}
 
+.blog-p
+{
+	font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	display: block;
+	font-weight: 300;
+	font-size: 17px;
+	color: #fff;
+
+}
+
+.blog-title {
+	font-weight: 300;
 }
 
 .signup {

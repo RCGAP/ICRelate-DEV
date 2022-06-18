@@ -13,7 +13,9 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('introduction')
+            ->add('introduction', TextareaType::class,[
+                'trim' => 'true',
+            ])
             ->add('content')
             ->add('youtube')
         ;

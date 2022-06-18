@@ -3,30 +3,32 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+<div class="container">
+  <form method="post">
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
+      <div class="mb-3">
+        You are logged in as
+        {{ app.user.username }},
+        <a href="{{ path('app_logout') }}">Logout</a>
+      </div>
     {% endif %}
-
-    <h1 class="mb-3 font-weight-normal text-white">Please sign in</h1>
+    <div class="mx-auto lg " style="width: 500px;">
+    <h1 class="display-5 mb-3 font-weight-normal text-white text-center" style="margin-top:20vh">Sign in</h1>
+    <hr>
     <div class="form-floating mb-3">
-    <input type="email" value="{{ last_username }}" name="email" id="floatingInput" class="form-control" placeholder="name@example.com" required autofocus>
-    <label for="floatingInput">Email</label>
+      <input type="email" value="{{ last_username }}" name="email" id="floatingInput" class="form-control" placeholder="name@example.com" required="required" autofocus="autofocus">
+      <label for="floatingInput">Email</label>
     </div>
     <div class="form-floating">
-    <input type="password" name="password" id="floatingPassword" class="form-control" required>
-    <label for="floatingPassword">Password</label>
+      <input type="password" name="password" id="floatingPassword" class="form-control" required="required">
+      <label for="floatingPassword">Password</label>
     </div>
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
@@ -38,8 +40,10 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+    <button class="btn btn-lg btn-primary p-3 m-3" type="submit">
+      Sign in
     </button>
-</form>
+  </div>
+  </div>
+  </form>
 {% endblock %}

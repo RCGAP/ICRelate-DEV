@@ -58,6 +58,7 @@ class ModerationController extends AbstractController
                 ->setIntroduction($introduction)
                 ->setcontent($content)
                 ->setYoutube($youtube);
+                
         $Manager->persist($post);
         $Manager->flush();
 

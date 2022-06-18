@@ -1,4 +1,24 @@
 {{ form_start(form) }}
+<div class="form-group">
+  <label class="lead">Title and Artist</label>
+  <input type="email" class="form-control" id="moderation_title" placeholder="Beartooth - Afterall">
+  <small id="emailHelp" class="form-text text-muted">Title - Artist</small>
+</div>
+  <label class="lead">Lyrics</label>
+<div class="form-group">
+  <textarea id="moderation_introduction" placeholder="I woke up with the same dark feeling"></textarea>
+  <small class="form-text text-muted"> 500</small>
+</div>
+<div class="form-group">
+  <label class="lead">ID spotify</label>
+  <input type="email" class="form-control" id="moderation_title" placeholder="Beartooth - Afterall">
+  <small id="emailHelp" class="form-text text-muted">Title - Artist</small>
+</div>
+<div class="form-group">
+  <label class="lead">Title and Artist</label>
+  <input type="email" class="form-control" id="moderation_title" placeholder="Beartooth - Afterall">
+  <small id="emailHelp" class="form-text text-muted">Title - Artist</small>
+</div>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-success btn-lg">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -4,8 +4,8 @@
 
 {% block body %}
     <h1>Create new Post</h1>
-
+            <h4 class="h3 mb-3 font-weight-normal text-white">
     {{ include('post/_form.html.twig') }}
-
+            </h4>
     <a href="{{ path('post_index') }}">back to list</a>
 {% endblock %}
